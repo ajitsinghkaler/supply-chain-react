@@ -1,0 +1,1 @@
+A truffle project in which you can create items and using and item manager manage it and trigger a deliver on tthe other side of the trigger delivery event we can whatever sequence we want to add.
