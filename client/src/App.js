@@ -52,15 +52,19 @@ class App extends Component {
   }
 
   listenToPaymentEvent = () => {
+    let self = this;
     this.itemManager.events.SupplyChainStep().on("data", async function (evt) {
       console.log(evt);
+      let itemobj = await self.itemManager.methods.items(evt.returnValues._itemIndex).call(self);
+      console.log(itemobj);
     })
+
   }
 
   handleSubmit = async () => {
     const { cost, itemName } = this.state;
     console.log({ cost, itemName });
-    
+
     const result = await this.itemManager.methods.createItem(itemName, cost).send({ from: this.accounts[0] });
     console.log(result);
     alert("Send" + cost + " Wei to " + result.events.SupplyChainStep.returnValues._itemAddress)
